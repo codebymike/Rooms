@@ -1,16 +1,14 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom"
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function Marketplace() {
-  const navigate = useNavigate()
 
   return (
     <>
-      <Header
-        title={<>Rooms</>}
-        subtitle={<>Marketplace</>}
-      />
+      <Header />
+      <p>Marketplace</p>
+      <Footer />
     </>
   )
 }

@@ -1,9 +1,13 @@
 import React from 'react'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 export default function NotFound() {
   return (
-    <div>
-      Not found
-    </div>
+    <>
+      <Header />
+      <p>Page Not Found</p>
+      <Footer />
+    </>
   )
 }
