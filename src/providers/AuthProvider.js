@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from 'react'
 
 import useCurrentUser from '../hooks/useCurrentUser.hook'
-import Header from '../components/Header'
 
 const AuthContext = createContext()
 
