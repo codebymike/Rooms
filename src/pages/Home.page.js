@@ -1,9 +1,12 @@
 import React from 'react'
+import { useAuth } from '../providers/AuthProvider'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Button from '../components/Button'
 
 export default function Home() {
+
+  const {user, loggedIn, logIn} = useAuth();
 
   return (
     <>
@@ -19,7 +22,11 @@ export default function Home() {
           <h2 className='text-xl sm:text-2xl'>Next-generation Blockchain Asset Platform</h2>
         </div>
 
-        <Button onClick={null}>Connect Wallet</Button>
+        { !user || !loggedIn ?
+        <Button onClick={() => logIn()}>Connect Wallet</Button>
+        :
+        <p>Balance 0p</p>
+        }
 
       </main>
       <Footer />
