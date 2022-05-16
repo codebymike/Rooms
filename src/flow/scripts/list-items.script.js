@@ -1,14 +1,17 @@
 export const LIST_ITEMS = `
-import DappyContract from 0xDappy
+import PopmojiItem from 0xPopmojiItem
+import NonFungibleToken from 0xNoneFungibleToken
 
-pub fun main(addr: Address): {UInt64: DappyContract.Template}? {
-    let account = getAccount(addr)
+pub fun main(account: Address): [&PopmojiItem.NFT] {
+    let collection = getAccount(account).getCapability(/public/PopmojiItemCollection)
+        .borrow<&PopmojiItem.Collection{NonFungibleToken.CollectionPublic, PopmojiItem.CollectionPublic}>()
+            ?? panic("Can't get the User's collection.")
 
-    if let ref = account.getCapability<&{DappyContract.CollectionPublic}>(DappyContract.CollectionPublicPath)
-        .borrow() {
-            let dappies = ref.listDappies()
-            return dappies
-        }
-
-    return nil
+    let returnVals: [&PopmojiItem.NFT] = []
+    let ids = collection.getIDs()
+    for id in ids {
+        returnVals.append(collection.borrowEntireNFT(id: id))
+    }
+    
+    return returnVals
 }`

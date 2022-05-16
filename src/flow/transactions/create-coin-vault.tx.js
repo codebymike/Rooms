@@ -1,23 +1,23 @@
 export const CREATE_COIN_VAULT = `
   import FungibleToken from 0xFungibleToken
-  import FUSD from 0xFUSD
+  import PopmojiCoin from 0xPopmojiCoin
 
   transaction {
     prepare(signer: AuthAccount) {
-      if(signer.borrow<&FUSD.Vault>(from: /storage/fusdVault) != nil) {
+      if(signer.borrow<&PopmojiCoin.Vault>(from: /storage/PopmojiCoinVault) != nil) {
         return
       }
     
-      signer.save(<-FUSD.createEmptyVault(), to: /storage/fusdVault)
+      signer.save(<-PopmojiCoin.createEmptyVault(), to: /storage/PopmojiCoinVault)
 
-      signer.link<&FUSD.Vault{FungibleToken.Receiver}>(
-        /public/fusdReceiver,
-        target: /storage/fusdVault
+      signer.link<&PopmojiCoin.Vault{FungibleToken.Receiver}>(
+        /public/PopmojiCoinReceiver,
+        target: /storage/PopmojiCoinVault
       )
 
-      signer.link<&FUSD.Vault{FungibleToken.Balance}>(
-        /public/fusdBalance,
-        target: /storage/fusdVault
+      signer.link<&PopmojiCoin.Vault{FungibleToken.Balance}>(
+        /public/PopmojiCoinBalance,
+        target: /storage/PopmojiCoinVault
       )
     }
   }

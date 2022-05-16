@@ -1,12 +1,12 @@
 export const DELETE_COLLECTION = `
-  import DappyContract from 0xDappy
+  import PopmojiItem from 0xPopmojiItem
 
   transaction() {
     prepare(acct: AuthAccount) {
-      let collectionRef <- acct.load<@DappyContract.Collection>(from: DappyContract.CollectionStoragePath)
+      let collectionRef <- acct.load<@PopmojiItem.Collection>(from: PopmojiItem.CollectionStoragePath)
         ?? panic("Could not borrow collection reference")
       destroy collectionRef
-      acct.unlink(DappyContract.CollectionPublicPath)
+      acct.unlink(PopmojiItem.CollectionPublicPath)
     }
   }
 `
