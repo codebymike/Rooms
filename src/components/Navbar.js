@@ -2,10 +2,11 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import { NAV_ROUTES } from '../config/routes.config'
 import { useAuth } from '../providers/AuthProvider'
+import Button from './Button'
 
 export default function Navbar() {
 
-  const {user, loggedIn} = useAuth();
+  const {user, loggedIn, logIn} = useAuth();
 
   const NavItem = ({ route }) => (
     <li className='sm:inline-block'>
@@ -18,7 +19,9 @@ export default function Navbar() {
   const WalletButton = () => {
     if (!user || !loggedIn){
       return (<li className='sm:inline-block'>
-                Connect Wallet
+                <Button onClick={() => logIn()}>
+                  Connect Wallet
+                </Button>
             </li>)
     }else{
       return (<li className='sm:inline-block'>
