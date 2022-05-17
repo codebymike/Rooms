@@ -1,4 +1,4 @@
-export const mintTx = `
+export const MINT_ITEM = `
     import PopmojiCoin from 0xPopmojiCoin
 
     let minterRef: &PopmojiCoin.NFTMinter

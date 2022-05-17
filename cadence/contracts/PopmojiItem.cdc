@@ -4,6 +4,10 @@ import NonFungibleToken from "./NonFungibleToken.cdc"
 pub contract PopmojiItem: NonFungibleToken {
 
   pub var totalSupply: UInt64
+  
+  pub let CollectionStoragePath: StoragePath
+  pub let CollectionPublicPath: PublicPath
+  pub let AdminStoragePath: StoragePath
 
   pub event ContractInitialized()
   pub event Withdraw(id: UInt64, from: Address?)
@@ -81,6 +85,9 @@ pub contract PopmojiItem: NonFungibleToken {
 
   init() {
     self.totalSupply = 0
+    self.CollectionStoragePath = /storage/PopmojiItemCollection
+    self.CollectionPublicPath = /public/PopmojiItemCollectionPublic
+    self.AdminStoragePath = /storage/PopmojiItemAdmin
     // store a minter resource in account storage
     self.account.save(<-create NFTMinter(), to: /storage/PopmojiItemMinter)
   }

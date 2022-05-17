@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react'
 
 import useUserPopmojiItems from '../hooks/useUserPopmojiItems.hook'
-import useCollection from '../hooks/use-collection.hook'
+import useCollection from '../hooks/useCollection.hook'
 import usePopmojiCoin from '../hooks/usePopmojiCoin.hook'
 import { useAuth } from './AuthProvider'
 

@@ -19,6 +19,7 @@ export default function useCollection(user) {
           cadence: CHECK_COLLECTION,
           args: (arg, t) => [arg(user?.addr, t.Address)]
         })
+        console.log('check collections: ', res);
         setCollection(res)
         setLoading(false)
       } catch (err) {

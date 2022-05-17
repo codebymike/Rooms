@@ -39,7 +39,7 @@ export default function Navbar() {
         <ul className='sm:self-center'>
           { NAV_ROUTES.map(item => <NavItem route={item} key={item.path} />) }
 
-          <WalletButton />
+          {/* <WalletButton /> */}
 
         </ul>
       </nav>

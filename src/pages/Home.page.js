@@ -1,12 +1,18 @@
 import React from 'react'
 import { useAuth } from '../providers/AuthProvider'
+import { useUser } from '../providers/UserProvider'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Button from '../components/Button'
 
 export default function Home() {
 
-  const {user, loggedIn, logIn} = useAuth();
+  const { user, loggedIn, logIn } = useAuth();
+  const { balance, createCoinVault, collection, createCollection, getCoinBalance } = useUser();
+
+  console.log('account: ', user?.addr);
+  console.log('balance: ', balance);
+  console.log('collections: ', collection);
 
   return (
     <>
@@ -25,8 +31,22 @@ export default function Home() {
         { !user || !loggedIn ?
         <Button onClick={() => logIn()}>Connect Wallet</Button>
         :
-        <p>Balance 0p</p>
+        <p>Wallet Connected</p>
         }
+
+        { !collection ?
+        <Button onClick={() => createCollection()}>Initialise Collections</Button>
+        :
+        <p>Collections Ready</p>
+        }
+
+        { !balance ?
+         <Button onClick={() => createCoinVault()}>Enable PopmojiCoin Wallet</Button> 
+        :
+        <p>Balance: {balance}</p>
+        }
+
+        <Button onClick={() => getCoinBalance()}>Check Balance</Button>
 
       </main>
       <Footer />
