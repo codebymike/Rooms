@@ -8,7 +8,7 @@ import Button from '../components/Button'
 export default function Home() {
 
   const { user, loggedIn, logIn } = useAuth();
-  const { balance, createCoinVault, collection, createCollection, getCoinBalance } = useUser();
+  const { balance, createCoinVault, collection, createCollection, deleteCollection } = useUser();
 
   console.log('account: ', user?.addr);
   console.log('balance: ', balance);
@@ -43,10 +43,10 @@ export default function Home() {
         { !balance ?
          <Button onClick={() => createCoinVault()}>Enable PopmojiCoin Wallet</Button> 
         :
-        <p>Balance: {balance}</p>
+        <p>PopmojiCoin Balance: {balance}</p>
         }
 
-        <Button onClick={() => getCoinBalance()}>Check Balance</Button>
+      {/* <Button onClick={() => deleteCollection()}>Delete Collection</Button>  */}
 
       </main>
       <Footer />
