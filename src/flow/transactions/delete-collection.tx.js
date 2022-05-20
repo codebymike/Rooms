@@ -3,10 +3,10 @@ export const DELETE_COLLECTION = `
 
   transaction() {
     prepare(acct: AuthAccount) {
-      let collectionRef <- acct.load<@PopmojiItem.Collection>(from: PopmojiItem.CollectionStoragePath)
+      let collectionRef <- acct.load<@PopmojiItem.Collection>(from: /storage/PopmojiItemCollection)
         ?? panic("Could not borrow collection reference")
       destroy collectionRef
-      acct.unlink(PopmojiItem.CollectionPublicPath)
+      acct.unlink(/public/PopmojiItemCollectionPublic)
     }
   }
 `
