@@ -1,6 +1,8 @@
 import { config } from "@onflow/fcl"
 
 config({
+  "app.detail.title":   "Popmoji:Rooms",
+  "app.detail.icon":    "https://cdn.shopify.com/s/files/1/0067/8848/1114/files/popmoji-smile.jpg?v=1652869994",
   "accessNode.api":     process.env.REACT_APP_ACCESS_NODE,
   "discovery.wallet":   process.env.REACT_APP_WALLET_DISCOVERY,
   //contracts
