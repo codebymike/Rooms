@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from 'react'
 import { mutate, query, tx } from '@onflow/fcl'
+import { create } from 'ipfs-http-client'
 
 import { LIST_ITEMS } from '../flow/scripts/list-items.script'
 import { MINT_ITEM } from '../flow/transactions/mint-popmoji-item.tx'
@@ -7,6 +8,9 @@ import { userItemsReducer } from '../reducer/userItemsReducer'
 import { useTxs } from '../providers/TxProvider'
 
 export default function useUserPopmojiItems(user, collection, getCoinBalance) {
+
+  const ipfs = create('https://ipfs.infura.io:5001/api/v0')
+
   const [state, dispatch] = useReducer(userItemsReducer, {
     loading: false,
     error: false,
@@ -16,8 +20,11 @@ export default function useUserPopmojiItems(user, collection, getCoinBalance) {
 
   useEffect(() => {
     const fetchUserItems = async () => {
+      if (!user?.addr) return
+
       dispatch({ type: 'PROCESSING' })
       try {
+
         let res = await query({
           cadence: LIST_ITEMS,
           args: (arg, t) => [arg(user?.addr, t.Address)]
@@ -32,7 +39,7 @@ export default function useUserPopmojiItems(user, collection, getCoinBalance) {
     //eslint-disable-next-line
   }, [])
 
-  const mintItem = async (templateID, amount) => {
+  const mintItem = async (item) => {
     if (!collection) {
       alert("You need to enable the collection first. Go to the tab Collection")
       return
@@ -41,58 +48,30 @@ export default function useUserPopmojiItems(user, collection, getCoinBalance) {
       alert("Transactions are still running. Please wait for them to finish first.")
       return
     }
+
+    const {itemName, itemType, itemFile} = item;
+
     try {
+      //add image to IPFS
+      const added = await ipfs.add(itemFile);
+      const hash = added.path
+
       let res = await mutate({
         cadence: MINT_ITEM,
         limit: 55,
-        args: (arg, t) => [arg(templateID, t.UInt32), arg(amount, t.UFix64)]
+        args: (arg, t) => [arg(hash, t.String), arg(itemName, t.String), arg(itemType, t.String)]
       })
       addTx(res)
       await tx(res).onceSealed()
-    //   await addDappy(templateID)
+      dispatch({ type: 'ADD', payload: item })
       await getCoinBalance()
     } catch (error) {
       console.log(error)
     }
   }
 
-//   const addItem = async (templateID) => {
-//     try {
-//       let res = await query({
-//         cadence: LIST_ITEMS,
-//         args: (arg, t) => [arg(user?.addr, t.Address)]
-//       })
-//     //   const dappies = Object.values(res)
-//     //   const dappy = dappies.find(d => d?.templateID === templateID)
-//     //   const newDappy = new DappyClass(dappy.templateID, dappy.dna, dappy.name)
-//       dispatch({ type: 'ADD', payload: newDappy })
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
-
-//   const batchAddDappies = async (dappies) => {
-//     try {
-//       let res = await query({
-//         cadence: LIST_ITEMS,
-//         args: (arg, t) => [arg(user?.addr, t.Address)]
-//       })
-//       const allDappies = Object.values(res)
-//       const dappyToAdd = allDappies.filter(d => dappies.includes(d?.templateID))
-//       const newDappies = dappyToAdd.map(d => new DappyClass(d.templateID, d.dna, d.name))
-//       for (let index = 0; index < newDappies.length; index++) {
-//         const element = newDappies[index];
-//         dispatch({ type: 'ADD', payload: element })
-//       }
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
-
   return {
     ...state,
     mintItem,
-    // addDappy,
-    // batchAddDappies
   }
 }

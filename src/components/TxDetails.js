@@ -1,5 +1,6 @@
 import React from 'react'
 import Spinner from '../components/Spinner'
+import './TxDetails.css'
 
 export default function TxDetails({ id }) {
   return (

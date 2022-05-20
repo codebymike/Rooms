@@ -19,6 +19,10 @@ export default function usePopmojiCoin(user) {
   }, [])
 
   const getCoinBalance = async () => {
+
+    if (!user?.addr) return
+
+    console.log('address: ', user?.addr,);
     dispatch({ type: 'PROCESSING' })
 
     try {

@@ -9,7 +9,7 @@ const UserContext = createContext()
 
 export default function UserProvider({ children }) {
   const { user } = useAuth()
-  const { collection, createCollection, deleteCollection } = useCollection(user)
+  const { collection, createCollection, deleteCollection, updateCollection } = useCollection(user)
   const { data: balance, createCoinVault, getCoinBalance } = usePopmojiCoin(user)
   const { data: UserPopmojiItems, mintItem } = useUserPopmojiItems(user, collection, getCoinBalance)
 
@@ -21,6 +21,7 @@ export default function UserProvider({ children }) {
         collection,
         createCollection,
         deleteCollection,
+        updateCollection,
         balance,
         createCoinVault,
         getCoinBalance
