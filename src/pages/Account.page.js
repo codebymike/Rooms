@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useUser } from '../providers/UserProvider'
+import { useAuth } from '../providers/AuthProvider'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Button from '../components/Button'
@@ -8,10 +9,14 @@ import Button from '../components/Button'
 export default function Account() {
 
   const { mintItem } = useUser(); 
+  const { user } = useAuth(); 
 
   const [itemName, setItemName] = useState("");
   const [itemType, setItemType] = useState("");
   const [itemFile, setItemFile] = useState("");
+
+  const [coinAddress, setCoinAddress] = useState("");
+  const [coinAmount, setCoinAmount] = useState("");
 
   const handleMintItem = () => {
     const item = {
@@ -20,6 +25,13 @@ export default function Account() {
       itemFile
     };
     mintItem(item);
+  }
+
+  const handleMintCoin = () => {
+    const item = {
+      coinAddress,
+      coinAmount
+    };
   }
 
   return (
@@ -31,28 +43,27 @@ export default function Account() {
           <h1 className='text-4xl sm:text-7xl font-bold capitalize'>
             <span className='block'>Account</span>
           </h1>
-          <h2 className='text-xl sm:text-2xl'>Mint New Popmoji:Item</h2>
         </div>
 
         <div className='content'>
-          <h2></h2>
+          <h2 className='text-xl sm:text-2xl mb-6 text-center'>Mint New Popmoji:Item</h2>
 
           <form className="w-full max-w-sm">
 
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
+                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
                   Item Name
                 </label>
               </div>
               <div className="md:w-2/3">
-                <input onChange={(e) => setItemName(e.target.value)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" />
+                <input onChange={(e) => setItemName(e.target.value)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" />
               </div>
             </div>
 
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
+                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
                   Type
                 </label>
               </div>
@@ -70,7 +81,7 @@ export default function Account() {
 
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
+                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
                   NFT Image
                 </label>
               </div>
@@ -86,7 +97,7 @@ export default function Account() {
                 transition
                 ease-in-out
                 m-0
-                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFile" />
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" />
               </div>
             </div>
 
@@ -96,8 +107,52 @@ export default function Account() {
                 <Button onClick={() => handleMintItem() } >Mint NFT</Button>
               </div>
             </div>
+
           </form>
 
+        </div>
+
+        <div className='content'>
+          <h2 className='text-xl sm:text-2xl mb-6 text-center'>Mint New Popmoji:Coins</h2>
+
+          <form className="w-full max-w-sm">
+
+            <div className="md:flex md:items-center mb-6">
+              <div className="md:w-1/3">
+                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
+                  Target Address
+                </label>
+              </div>
+              <div className="md:w-2/3">
+                <input value={user?.addr ? user?.addr : ""} onChange={(e) => setCoinAddress(e.target.value)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" />
+              </div>
+            </div>
+
+            <div className="md:flex md:items-center mb-6">
+              <div className="md:w-1/3">
+                <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
+                  Amount
+                </label>
+              </div>
+              <div className="md:w-2/3">
+                <input 
+                  value={coinAmount}
+                  placeholder="0.00"
+                  onChange={(e) => setCoinAmount(e.target.value)} 
+                  type="number"
+                  step="0.01"
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
+              </div>
+            </div>
+
+            <div className="md:flex md:items-center">
+              <div className="md:w-1/3"></div>
+              <div className="md:w-2/3">
+                <Button onClick={() => handleMintCoin() } >Deposit Funds</Button>
+              </div>
+            </div>
+
+          </form>
         </div>
 
       </main>
