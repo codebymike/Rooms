@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { mutate, query, transaction, tx } from '@onflow/fcl'
+import { mutate, query, tx } from '@onflow/fcl'
 
 import { CHECK_COLLECTION } from '../flow/scripts/check-collection.script'
 import { DELETE_COLLECTION } from '../flow/transactions/delete-collection.tx'
@@ -13,7 +13,6 @@ export default function useCollection(user) {
   const { addTx } = useTxs()
 
   useEffect(() => {
-    if (!user?.addr) return
     const checkCollection = async () => {
       try {
         let res = await query({
@@ -28,8 +27,7 @@ export default function useCollection(user) {
       }
     }
     checkCollection()
-    //eslint-disable-next-line
-  }, [])
+  }, [user])
 
   const createCollection = async () => {
     let res = await mutate({

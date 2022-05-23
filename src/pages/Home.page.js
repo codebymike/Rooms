@@ -8,7 +8,7 @@ import Button from '../components/Button'
 export default function Home() {
 
   const { user, loggedIn, logIn } = useAuth();
-  const { balance, createCoinVault, collection, createCollection, deleteCollection } = useUser();
+  const { balance, createCoinVault, collection, createCollection } = useUser();
 
   console.log('account: ', user?.addr);
   console.log('balance: ', balance);
