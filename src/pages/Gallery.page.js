@@ -6,7 +6,7 @@ import Collection from '../components/Collection'
 
 export default function Gallery() {
 
-  const { collection, UserPopmojiItems } = useUser()
+  const { collection, popmojiItems } = useUser()
 
   return (
     <>
@@ -22,7 +22,7 @@ export default function Gallery() {
         <div className='content'>
 
           { collection? 
-            <Collection items={UserPopmojiItems}/>
+            <Collection items={popmojiItems}/>
           :
             <p>No Items to display</p>
           }

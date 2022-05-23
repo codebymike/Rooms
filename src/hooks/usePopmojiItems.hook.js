@@ -7,7 +7,7 @@ import { MINT_ITEM } from '../flow/transactions/mint-popmoji-item.tx'
 import { userItemsReducer } from '../reducer/userItemsReducer'
 import { useTxs } from '../providers/TxProvider'
 
-export default function useUserPopmojiItems(user, collection, getCoinBalance) {
+export default function usePopmojiItems(user, collection, getCoinBalance) {
 
   const ipfs = create('https://ipfs.infura.io:5001/api/v0')
 
