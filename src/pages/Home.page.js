@@ -9,11 +9,7 @@ export default function Home() {
 
   const { user, loggedIn, logIn } = useAuth();
   const { balance, createCoinVault, collection, createCollection } = useUser();
-
-  console.log('account: ', user?.addr);
-  console.log('balance: ', balance);
-  console.log('collections: ', collection);
-
+  
   return (
     <>
       <Header />

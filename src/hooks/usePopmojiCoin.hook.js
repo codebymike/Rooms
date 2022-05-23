@@ -6,7 +6,7 @@ import { query, mutate, tx } from '@onflow/fcl'
 import { useTxs } from '../providers/TxProvider'
 
 export default function usePopmojiCoin(user) {
-  const [state, dispatch] = useReducer(defaultReducer, {
+  const [ state, dispatch ] = useReducer(defaultReducer, {
     loading: true,
     error: false,
     data: null
@@ -16,11 +16,10 @@ export default function usePopmojiCoin(user) {
 
   const getCoinBalance = useCallback(() => {
     const callback = async () => {
-        if (!user?.addr) return
+
+        if( !user || !user.addr ) return;
     
-        console.log('address: ', user?.addr,);
         dispatch({ type: 'PROCESSING' })
-    
         try {
           let response = await query({
             cadence: GET_COIN_BALANCE,
@@ -33,8 +32,9 @@ export default function usePopmojiCoin(user) {
           dispatch({ type: 'ERROR' })
           console.log(err)
         }
-      }
-      callback();
+    }
+    callback();
+    
     },[user]
   )
 

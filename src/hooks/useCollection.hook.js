@@ -8,11 +8,13 @@ import { CREATE_UPDATED_LINK } from '../flow/transactions/create-updated-list.tx
 import { useTxs } from '../providers/TxProvider'
 
 export default function useCollection(user) {
-  const [loading, setLoading] = useState(true)
-  const [collection, setCollection] = useState(null)
+  const [ loading, setLoading ] = useState(true)
+  const [ collection, setCollection ] = useState(null)
   const { addTx } = useTxs()
 
   useEffect(() => {
+    if( !user || !user.addr ) return;
+
     const checkCollection = async () => {
       try {
         let res = await query({

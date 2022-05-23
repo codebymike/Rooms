@@ -20,7 +20,6 @@ export default function usePopmojiItems(user, collection, getCoinBalance) {
 
   useEffect(() => {
     const fetchUserItems = async () => {
-      if (!user?.addr) return
 
       dispatch({ type: 'PROCESSING' })
       try {
@@ -36,8 +35,7 @@ export default function usePopmojiItems(user, collection, getCoinBalance) {
       }
     }
     fetchUserItems()
-    //eslint-disable-next-line
-  }, [])
+  }, [user])
 
   const mintItem = async (item) => {
     if (!collection) {
