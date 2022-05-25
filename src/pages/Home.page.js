@@ -29,7 +29,10 @@ export default function Home() {
         { !user || !loggedIn ?
         <Button onClick={() => logIn()}>Login & Connect Wallet</Button>
         :
-        <p>Wallet Connected</p>
+        <p>
+          Wallet Connected<br />
+          as { user.addr }
+        </p>
         }
 
         { !collection ?
