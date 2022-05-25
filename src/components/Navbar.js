@@ -34,7 +34,9 @@ export default function Navbar() {
   return (
       <nav className='flex justify-between mx-auto px-4 sm:px-6 py-4'>
         <div className='logo'>
+          <Link to="/" >
           <img src={`${process.env.PUBLIC_URL}/assets/pmlogo_white.png`} width="200px" alt="Popmoji" />
+          </Link>
         </div>
         <ul className='sm:self-center'>
           { NAV_ROUTES.map(item => <NavItem route={item} key={item.path} />) }
