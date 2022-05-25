@@ -1,5 +1,4 @@
-// ref to core contract on main testnet
-import NonFungibleToken from "./NonFungibleToken.cdc"
+import NonFungibleToken from 0xa2476927d1000eae
 
 pub contract PopmojiItem: NonFungibleToken {
 
