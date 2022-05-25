@@ -8,8 +8,10 @@ import Button from '../components/Button'
 
 export default function Account() {
 
-  const { mintItem } = useUser(); 
-  const { user } = useAuth(); 
+  const { mintItem, mintCoins } = useUser(); 
+  const { user, logOut } = useAuth(); 
+
+  console.log(user?.addr);
 
   const [itemName, setItemName] = useState("");
   const [itemType, setItemType] = useState("");
@@ -30,8 +32,9 @@ export default function Account() {
   const handleMintCoin = () => {
     const item = {
       coinAddress,
-      coinAmount
+      coinAmount: parseFloat(coinAmount).toFixed(2)
     };
+    mintCoins(item);
   }
 
   return (
@@ -43,6 +46,7 @@ export default function Account() {
           <h1 className='text-4xl sm:text-7xl font-bold capitalize'>
             <span className='block'>Account</span>
           </h1>
+          <Button onClick={() => logOut() } >Logout</Button>
         </div>
 
         <div className='content'>
@@ -124,7 +128,7 @@ export default function Account() {
                 </label>
               </div>
               <div className="md:w-2/3">
-                <input value={user?.addr ? user?.addr : ""} onChange={(e) => setCoinAddress(e.target.value)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" />
+                <input onChange={(e) => setCoinAddress(e.target.value)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" />
               </div>
             </div>
 
@@ -153,6 +157,8 @@ export default function Account() {
             </div>
 
           </form>
+
+
         </div>
 
       </main>

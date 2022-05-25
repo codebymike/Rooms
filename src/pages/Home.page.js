@@ -9,6 +9,8 @@ export default function Home() {
 
   const { user, loggedIn, logIn } = useAuth();
   const { balance, createCoinVault, collection, createCollection } = useUser();
+
+  console.log(balance);
   
   return (
     <>
@@ -25,19 +27,19 @@ export default function Home() {
         </div>
 
         { !user || !loggedIn ?
-        <Button onClick={() => logIn()}>Connect Wallet</Button>
+        <Button onClick={() => logIn()}>Login & Connect Wallet</Button>
         :
         <p>Wallet Connected</p>
         }
 
         { !collection ?
-        <Button onClick={() => createCollection()}>Initialise Collections</Button>
+        <Button onClick={() => createCollection()}>Create Collections for PopmojiItems</Button>
         :
         <p>Collections Ready</p>
         }
 
         { !balance ?
-         <Button onClick={() => createCoinVault()}>Enable PopmojiCoin Wallet</Button> 
+         <Button onClick={() => createCoinVault()}>Initialise Wallet for PopmojiCoin</Button> 
         :
         <p>PopmojiCoin Balance: {balance}</p>
         }
