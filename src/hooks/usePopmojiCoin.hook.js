@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useCallback } from 'react'
 import { CREATE_COIN_VAULT } from '../flow/transactions/create-coin-vault.tx';
+import { MINT_COIN } from '../flow/transactions/mint-popmoji-coin';
 import { GET_COIN_BALANCE } from '../flow/scripts/get-coin-balance.script';
 import { defaultReducer } from '../reducer/defaultReducer'
 import { query, mutate, tx } from '@onflow/fcl'
@@ -27,6 +28,7 @@ export default function usePopmojiCoin(user) {
               arg(user?.addr, t.Address)
             ]
           })
+          console.log('res', response);
           dispatch({ type: 'SUCCESS', payload: response })
         } catch (err) {
           dispatch({ type: 'ERROR' })
@@ -57,9 +59,33 @@ export default function usePopmojiCoin(user) {
     }
   }
 
+  const mintCoins = async ({coinAddress, coinAmount}) => {
+
+    console.log(coinAddress, coinAmount);
+
+    dispatch({ type: 'PROCESSING' })
+    try {
+      let transaction = await mutate({
+        cadence: MINT_COIN,
+        limit: 55,
+        args: (arg, t) => [
+          arg(coinAddress, t.Address),
+          arg(coinAmount, t.UFix64)
+        ]
+      })
+      addTx(transaction)
+      await tx(transaction).onceSealed()
+      dispatch({ type: 'SUCCESS' })
+    } catch (err) {
+      dispatch({ type: 'ERROR' })
+      console.log(err)
+    }
+  }
+
   return {
     ...state,
     createCoinVault,
-    getCoinBalance
+    getCoinBalance,
+    mintCoins
   }
 }
