@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { NAV_ROUTES } from '../config/routes.config'
-import { useAuth } from '../providers/AuthProvider'
-import Button from './Button'
+// import { useAuth } from '../providers/AuthProvider'
+// import Button from './Button'
 
 export default function Navbar() {
 
-  const {user, loggedIn, logIn} = useAuth();
+  // const {user, loggedIn, logIn} = useAuth();
 
   const NavItem = ({ route }) => (
     <li className='sm:inline-block'>
@@ -16,20 +16,19 @@ export default function Navbar() {
     </li>
   )
 
-  const WalletButton = () => {
-    if (!user || !loggedIn){
-      return (<li className='sm:inline-block'>
-                <Button onClick={() => logIn()}>
-                  Connect Wallet
-                </Button>
-            </li>)
-    }else{
-      return (<li className='sm:inline-block'>
-              Balance 0p
-            </li>)
-    }
-
-  }
+  // const WalletButton = () => {
+  //   if (!user || !loggedIn){
+  //     return (<li className='sm:inline-block'>
+  //               <Button onClick={() => logIn()}>
+  //                 Connect Wallet
+  //               </Button>
+  //           </li>)
+  //   }else{
+  //     return (<li className='sm:inline-block'>
+  //             Balance 0p
+  //           </li>)
+  //   }
+  // }
 
   return (
       <nav className='flex justify-between mx-auto px-4 sm:px-6 py-4'>
