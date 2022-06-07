@@ -4,7 +4,7 @@ export default function Card({item}) {
     console.log(item);
     return (
         <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
+            <a href="{null}">
                 <img className="rounded-t-lg" src={`https://ipfs.infura.io/ipfs/${item.ipfsHash}`} alt="" />
             </a>
             <div className="p-5">

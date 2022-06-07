@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useCallback } from 'react'
 import { CREATE_COIN_VAULT } from '../flow/transactions/create-coin-vault.tx';
-import { MINT_COIN } from '../flow/transactions/mint-popmoji-coin';
+import { MINT_COIN } from '../flow/transactions/mint-popmoji-coin.tx';
 import { GET_COIN_BALANCE } from '../flow/scripts/get-coin-balance.script';
 import { defaultReducer } from '../reducer/defaultReducer'
 import { query, mutate, tx } from '@onflow/fcl'

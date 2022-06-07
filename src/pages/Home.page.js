@@ -47,8 +47,6 @@ export default function Home() {
         <p>PopmojiCoin Balance: {balance}</p>
         }
 
-      {/* <Button onClick={() => deleteCollection()}>Delete Collection</Button>  */}
-
       </main>
       <Footer />
     </>

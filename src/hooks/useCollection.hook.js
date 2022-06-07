@@ -4,7 +4,6 @@ import { mutate, query, tx } from '@onflow/fcl'
 import { CHECK_COLLECTION } from '../flow/scripts/check-collection.script'
 import { DELETE_COLLECTION } from '../flow/transactions/delete-collection.tx'
 import { CREATE_COLLECTION } from '../flow/transactions/create-collection.tx'
-import { CREATE_UPDATED_LINK } from '../flow/transactions/create-updated-list.tx'
 import { useTxs } from '../providers/TxProvider'
 
 export default function useCollection(user) {
@@ -56,23 +55,10 @@ export default function useCollection(user) {
     }
   }
 
-  // Temp
-  const updateCollection = async () => {
-    let res = await mutate({
-      cadence: CREATE_UPDATED_LINK,
-      limit: 55
-
-    })
-    addTx(res)
-    await tx(res).onceSealed()
-    setCollection(true)
-  }
-
   return {
     loading,
     collection,
     createCollection,
-    deleteCollection,
-    updateCollection
+    deleteCollection
   }
 }
