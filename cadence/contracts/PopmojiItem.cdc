@@ -1,5 +1,5 @@
-import NonFungibleToken from 0xb610d9b53aff6fc5
-import MetadataViews from 0xb610d9b53aff6fc5
+import NonFungibleToken from "./NonFungibleToken.cdc"
+import MetadataViews from "./MetadataViews.cdc"
 
 pub contract PopmojiItem: NonFungibleToken {
 

@@ -1,4 +1,4 @@
-import FungibleToken 0xb610d9b53aff6fc5
+import FungibleToken from "./FungibleToken.cdc"
 
 pub contract PopmojiCoin: FungibleToken {
 

@@ -1,7 +1,7 @@
-import NonFungibleToken from 0xa2476927d1000eae
-import FungibleToken from 0xa2476927d1000eae
-import PopmojiItem from 0xa2476927d1000eae
-import PopmojiCoin from 0xa2476927d1000eae
+import NonFungibleToken from "./NonFungibleToken.cdc"
+import FungibleToken from "./FungibleToken.cdc"
+import PopmojiItem from "./PopmojiItem.cdc"
+import PopmojiCoin from "./PopmojiCoin.cdc"
 
 pub contract NFTMarketplace {
 

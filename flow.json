@@ -5,7 +5,37 @@
 			"serviceAccount": "emulator-account"
 		}
 	},
-	"contracts": {},
+	"contracts": {
+		"PopmojiCoin": "./cadence/contracts/PopmojiCoin.cdc",
+		"PopmojiItem": "./cadence/contracts/PopmojiItem.cdc",
+
+		"NFTMarketplace": {
+			"source": "./cadence/contracts/NFTMarketplace.cdc",
+			"aliases": {
+				"testnet": "0x94b06cfca1d8a476"
+			}
+		},
+		"NonFungibleToken": {
+			"source": "./cadence/contracts/NonFungibleToken.cdc",
+			"aliases": {
+				"emulator": "0xf8d6e0586b0a20c7",
+				"testnet": "0x631e88ae7f1d7c20"
+			}
+		},
+		"MetadataViews": {
+			"source": "./cadence/contracts/MetadataViews.cdc",
+			"aliases": {
+				"testnet": "0x631e88ae7f1d7c20"
+			}
+		},
+		"FungibleToken": {
+			"source": "./cadence/contracts/FungibleToken.cdc",
+			"aliases": {
+				"emulator": "0xee82856bf20e2aa6",
+				"testnet": "0x9a0766d93b6608b7"
+			}
+		}
+	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",
 		"mainnet": "access.mainnet.nodes.onflow.org:9000",
@@ -18,5 +48,14 @@
 		},
 		"admin-account": { "fromFile": "./flow.testnet.json" }
 	},
-	"deployments": {}
+	"deployments": {
+		"emulator": {
+			"emulator-account": [
+				"PopmojiCoin",
+				"PopmojiItem",
+				"NonFungibleToken",
+				"MetadataViews"
+			]
+		}
+	}
 }
