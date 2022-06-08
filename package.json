@@ -16,10 +16,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "start:emulator": "env-cmd -f .env.emulator react-scripts start",
+    "start:testnet": "env-cmd -f .env.testnet react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "emulator:start": "flow emulator",
+    "emulator:deploy": "flow project deploy"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +45,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
+    "env-cmd": "^10.1.0",
     "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24"
   }

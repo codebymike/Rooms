@@ -44,7 +44,7 @@
 	"accounts": {
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
-			"key": "14e014a3bb408f0d298dffa8039275273946302da79702d91330071dae0edbaf"
+			"key": "6eb820e40d036f6f1d68a6b41212fcae093b6e471d7d72fa6f21f9629c291542"
 		},
 		"admin-account": { "fromFile": "./flow.testnet.json" }
 	},
