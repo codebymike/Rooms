@@ -50,7 +50,7 @@ export default function Account() {
         </div>
 
         <div className='content'>
-          <h2 className='text-xl sm:text-2xl mb-6 text-center'>Mint New Popmoji:Item</h2>
+          <h2 className='text-xl sm:text-2xl mb-6 text-center'>Mint New Popmoji: Item</h2>
 
           <form className="w-full max-w-sm">
 
@@ -117,7 +117,7 @@ export default function Account() {
         </div>
 
         <div className='content'>
-          <h2 className='text-xl sm:text-2xl mb-6 text-center'>Mint New Popmoji:Coins</h2>
+          <h2 className='text-xl sm:text-2xl mb-6 text-center'>Mint New Popmoji: Coins</h2>
 
           <form className="w-full max-w-sm">
 

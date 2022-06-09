@@ -57,11 +57,24 @@ export default function usePopmojiItems(user, collection, getCoinBalance) {
       let res = await mutate({
         cadence: MINT_ITEM,
         limit: 55,
-        args: (arg, t) => [arg(hash, t.String), arg(itemName, t.String), arg(itemType, t.String)]
+        args: (arg, t) => [
+          arg(user?.addr, t.Address),   // recipient
+          arg(itemName, t.String),      // name
+          arg(itemType, t.String),      // description
+          arg(hash, t.String),          // thumbnail
+          arg([], t.Array(t.UFix64)),           //cuts
+          arg([], t.Array(t.String)),           //royaltyDescriptions
+          arg([], t.Array(t.Address)),        //royaltyBeneficiaries
+        ]
       })
       addTx(res)
       await tx(res).onceSealed()
-      dispatch({ type: 'ADD', payload: item })
+      dispatch({ type: 'ADD', payload:{
+        id: 999,
+        name: itemName,
+        desciption: itemType,
+        thumbnail: itemFile,
+      }})
       await getCoinBalance()
     } catch (error) {
       console.log(error)
