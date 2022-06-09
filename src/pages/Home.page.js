@@ -8,9 +8,7 @@ import Button from '../components/Button'
 export default function Home() {
 
   const { user, loggedIn, logIn } = useAuth();
-  const { balance, createCoinVault, collection, createCollection } = useUser();
-
-  console.log(balance);
+  const { balance, createCoinVault, collection, createCollection, popmojiItems } = useUser();
   
   return (
     <>
@@ -38,7 +36,7 @@ export default function Home() {
         { !collection ?
         <Button onClick={() => createCollection()}>Create Collections for PopmojiItems</Button>
         :
-        <p>Collections Ready</p>
+        <p>Collections Ready: {popmojiItems.length} items</p>
         }
 
         { !balance ?
