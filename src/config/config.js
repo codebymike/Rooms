@@ -10,6 +10,6 @@ config({
   "0xNonFungibleToken": process.env.REACT_APP_NFT_CONTRACT,
   "0xPopmojiCoin":      process.env.REACT_APP_POPMOJICOIN_CONTRACT,
   "0xPopmojiItem":      process.env.REACT_APP_POPMOJIITEM_CONTRACT,
-  "0xNFTMarketplace":   process.env.REACT_APP_NFTMARKETPLACE_CONTRACT,
+  "0xNFTStorefront":    process.env.REACT_APP_NFTSTOREFRONT_CONTRACT,
   "0xMetaDataViews":    process.env.REACT_APP_METADATAVIEWS_CONTRACT,
 })
