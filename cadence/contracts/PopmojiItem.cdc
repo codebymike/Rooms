@@ -162,15 +162,15 @@ pub contract PopmojiItem: NonFungibleToken {
         // borrowNFT gets a reference to an NFT in the collection
         // so that the caller can read its metadata and call its methods
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
-            // return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
-            return (&self.ownedNFTs[id] as &NonFungibleToken.NFT)
+            return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
+            // return (&self.ownedNFTs[id] as &NonFungibleToken.NFT)
         }
  
         pub fun borrowPopmojiItem(id: UInt64): &PopmojiItem.NFT? {
             if self.ownedNFTs[id] != nil {
                 // Create an authorized reference to allow downcasting
-                // let ref = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
-                let ref = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT)
+                let ref = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
+                // let ref = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT)
                 return ref as! &PopmojiItem.NFT
             }
 
@@ -178,8 +178,8 @@ pub contract PopmojiItem: NonFungibleToken {
         }
 
         pub fun borrowViewResolver(id: UInt64): &AnyResource{MetadataViews.Resolver} {
-            // let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
-            let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT)
+            let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
+            // let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT)
             let PopmojiItem = nft as! &PopmojiItem.NFT
             return PopmojiItem as &AnyResource{MetadataViews.Resolver}
         }
