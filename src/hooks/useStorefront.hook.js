@@ -1,7 +1,8 @@
 import { useReducer } from 'react'
+import { mutate, query, tx } from '@onflow/fcl'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { CREATE_LISTING } from '../flow/transactions/create-listing.tx';
-import { GET_LISTINGS } from '../flow/scripts/get-listings.tx';
+import { GET_LISTINGS } from '../flow/scripts/get-listings.script';
 import { useTxs } from '../providers/TxProvider'
 
 export default function useStorefront(user) {
@@ -43,6 +44,7 @@ export default function useStorefront(user) {
           await tx(transaction).onceSealed()
           dispatch({ type: 'SUCCESS', })
         } catch (err) {
+          console.log(err);
           dispatch({ type: 'ERROR' })
         }
     }
